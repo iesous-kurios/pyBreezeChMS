@@ -14,13 +14,10 @@ Usage:
   for person in people:
     print '%s %s' % (person['first_name'], person['last_name'])
 """
-
-__author__ = 'alexortizrosado@gmail.com (Alex Ortiz-Rosado)'
-
 import logging
 import requests
-
 from .utils import make_enum
+__author__ = 'alexortizrosado@gmail.com (Alex Ortiz-Rosado)'
 
 ENDPOINTS = make_enum(
     'BreezeApiURL',
@@ -120,7 +117,7 @@ class BreezeApi(object):
             return not (('errors' in response) or ('errorCode' in response))
 
     def get_account_summary(self):
-        """Retrieve the details for a specific account using the API key 
+        """Retrieve the details for a specific account using the API key
           and URL. It can also work to see if the key and URL are valid.
 
         Returns:
@@ -579,11 +576,11 @@ class BreezeApi(object):
             { ... }
             ]"""
 
-
         params = []
         if folder:
             params.append('folder_id=%s' % folder)
-        return self._request('%s/%s/?%s' % (ENDPOINTS.TAGS, 'list_tags', '&'.join(params)))
+        return self._request('%s/%s/?%s' % (ENDPOINTS.TAGS,
+                             'list_tags', '&'.join(params)))
 
     def get_tag_folders(api):
         """List of tag folders
@@ -620,54 +617,52 @@ class BreezeApi(object):
              ]"""
         return api._request("%s/%s" % (ENDPOINTS.TAGS, "list_folders"))
 
-    def assign_tag(self, 
+    def assign_tag(self,
                    person_id,
                    tag_id):
         """
         Update a person's tag/s.
-        
+
         params:
-        
+
         person_id: an existing person's user id
-        
+
         tag_id: the id number of the tag you want to assign to the user
-        
+
         output: true or false upon success or failure of tag update
         """
         params = []
-                   
-        params.append('person_id=%s' % person_id)           
+
+        params.append('person_id=%s' % person_id)
 
         params.append('tag_id=%s' % tag_id)
 
         response = self._request('%s/assign?%s' %
-                             (ENDPOINTS.TAGS, '&'.join(params)))
-        
+                                 (ENDPOINTS.TAGS, '&'.join(params)))
+
         return response
-    
-    def unassign_tag(self, 
-                   person_id,
-                   tag_id):
+
+    def unassign_tag(self,
+                     person_id,
+                     tag_id):
         """
         Delete a person's tag/s.
-        
+
         params:
-        
+
         person_id: an existing person's user id
-        
+
         tag_id: the id number of the tag you want to assign to the user
-        
+
         output: true or false upon success or failure of tag deletion
         """
         params = []
-                   
-        params.append('person_id=%s' % person_id)           
+
+        params.append('person_id=%s' % person_id)
 
         params.append('tag_id=%s' % tag_id)
 
         response = self._request('%s/unassign?%s' %
-                             (ENDPOINTS.TAGS, '&'.join(params)))
-        
-        return response            
+                                 (ENDPOINTS.TAGS, '&'.join(params)))
 
-
+        return response
