@@ -477,6 +477,8 @@ class BreezeApiTestCase(unittest.TestCase):
             "%s%s/list_folders" % (FAKE_SUBDOMAIN, breeze.ENDPOINTS.TAGS)
         )
 
+        # begin added unit tests
+        
     def test_assign_tag(self):
         person_id = '12345'
         tag_id = '1234567'
@@ -510,6 +512,6 @@ class BreezeApiTestCase(unittest.TestCase):
         self.assertEqual(
             connection.url,
             "%s%s/unassign?person_id=%s&tag_id=%s" % (FAKE_SUBDOMAIN, breeze.ENDPOINTS.TAGS, person_id, tag_id))    
-
+# end added unit tests
 if __name__ == '__main__':
     unittest.main()
