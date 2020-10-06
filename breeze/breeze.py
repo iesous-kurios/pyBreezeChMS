@@ -617,6 +617,7 @@ class BreezeApi(object):
              ]"""
         return api._request("%s/%s" % (ENDPOINTS.TAGS, "list_folders"))
 
+      # begin added methods
     def assign_tag(self,
                    person_id,
                    tag_id):
@@ -664,5 +665,5 @@ class BreezeApi(object):
 
         response = self._request('%s/unassign?%s' %
                                  (ENDPOINTS.TAGS, '&'.join(params)))
-
+# end of added methods
         return response
